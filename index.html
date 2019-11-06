@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>To-Do</title>
+		<link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-image: url("static/bg.jpg");
+      }
+    </style>
+	</head>
+
+  <body>
+    <div class="container">
+      <div id="app">
+          <h1>To-Do</h1>
+            <div class="task-wrapper">
+                <div class="tasks" v-for="task in tasks">
+                  <div class="check">✔️</div>
+                  <div class="task"><p>{{ task }}</p></div>
+                  <div class="trash"></div>
+                </div>
+              </div>
+            <div class="add"><p>+</p></div>
+      </div>
+      <div class="attribution">© 2019 Richard Coucoules</div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var tasks = ["Sweep the floor", "Walk the dog", "Take out the trash"];
+    var app = new Vue({
+      el: "#app",
+      data: {
+        tasks: tasks,
+        trash: "static/trash.svg",
+        trashMouseover: "static/trashMouseover.svg"
+        },
+      methods: {
+        createTask: function(task) {
+          this.tasks.push(task);
+        },
+      },
+    });
+  </script>
+</html>
