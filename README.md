@@ -17,7 +17,7 @@ The following features are planned to be added to meet these functional requirem
     - [ ] The user will have a cancel button, but it will be disabled for the initial task.
   - [ ] The user will be able to press the "+" at the bottom right of the task list to generate a new task prompt at the bottom of the task list to create additional tasks.
     - [ ] In addition to the properties listed above, the new task prompt for all tasks except the first will have a cancel button to cancel the process of task creation.
-  - [ ] Tasks in the task list will have a trash can icon on the right hand side. Clicking this icon will allow the user to delete the associated task.
+  - [x] Tasks in the task list will have a trash can icon on the right hand side. Clicking this icon will allow the user to delete the associated task.
     - [ ] UNDER CONSIDERATION: Present the user with a confirm screen to confirm task deletion.
   - [x] Tasks in the task list will have a check box on the left hand side. Checking this box will signify the task is complete.
     - [x] The title of the task will be italicized, the text will be struck through, and the text color will be lightened to signify task completion.
