@@ -18,9 +18,9 @@
     <div class="container">
       <div id="app">
           <h1>To-Do</h1>
-            <div class="task-wrapper">
-                <div class="tasks" v-for="task in tasks">
-                  <div class="check">✔️</div>
+            <div class="task-wrapper" ref="check">
+                <div class="tasks" v-for="(task, index) in tasks">
+                  <div class="check"><img src="static/checkbox.svg" @mouseover="checkHover(index)" @mouseout="checkOff(index)" @click="clickCheck(index)"></img></div>
                   <div class="task"><p>{{ task }}</p></div>
                   <div class="trash"></div>
                 </div>
@@ -44,6 +44,31 @@
         createTask: function(task) {
           this.tasks.push(task);
         },
+				checkHover: function(index) {
+					let checkBox = this.$refs.check.children[index].children[0].children[0];
+					let task = this.$refs.check.children[index].children[1];
+					if (!task.classList.contains("finished")) {
+						checkBox.setAttribute('src', 'static/checkbox-hover.svg');
+					}
+				},
+				checkOff: function(index) {
+					let checkBox = this.$refs.check.children[index].children[0].children[0];
+					let task = this.$refs.check.children[index].children[1];
+					if (!task.classList.contains("finished")) {
+						checkBox.setAttribute('src', 'static/checkbox.svg');
+					}
+				},
+				clickCheck: function(index) {
+					let checkBox = this.$refs.check.children[index].children[0].children[0];
+					let task = this.$refs.check.children[index].children[1];
+					task.classList.toggle("finished");
+					if (checkBox.getAttribute('src') == 'static/checkbox-hover.svg') {
+						checkBox.setAttribute('src', 'static/checked-box.svg');
+					}
+					else {
+						checkBox.setAttribute('src', 'static/checkbox.svg')
+					}
+				},
       },
     });
   </script>
