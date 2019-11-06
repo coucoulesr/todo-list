@@ -5,7 +5,7 @@ This project is a web-based to-do list app built with Vue.js. This app is curren
 
 Upon completion, the app will have the following functionality:
   - [ ] The user should be able to add tasks to the app.
-  - [ ] The user should be able to delete tasks from the app.
+  - [x] The user should be able to delete tasks from the app.
   - [x] The user should be able to check tasks off of the app and see that they are complete.
   - [ ] The user should be able to save their to-do list.
 
