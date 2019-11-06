@@ -20,9 +20,9 @@
           <h1>To-Do</h1>
             <div class="task-wrapper" ref="check">
                 <div class="tasks" v-for="(task, index) in tasks">
-                  <div class="check"><img src="static/checkbox.svg" @mouseover="checkHover(index)" @mouseout="checkOff(index)" @click="clickCheck(index)"></img></div>
+                  <div class="check"><img src="static/checkbox.svg" @mouseover="checkHover(index)" @mouseout="checkOff(index)" @click="clickCheck(index)"></div>
                   <div class="task"><p>{{ task }}</p></div>
-                  <div class="trash"></div>
+                  <div class="trash"><img src="static/trash.svg" @mouseover="trashHover(index)" @mouseout="trashOff(index)"></div>
                 </div>
               </div>
             <div class="add"><p>+</p></div>
@@ -37,13 +37,21 @@
       el: "#app",
       data: {
         tasks: tasks,
-        trash: "static/trash.svg",
-        trashMouseover: "static/trashMouseover.svg"
         },
       methods: {
         createTask: function(task) {
           this.tasks.push(task);
         },
+
+				trashHover: function(index) {
+					let trash = this.$refs.check.children[index].children[2].children[0];
+					trash.setAttribute('src', 'static/trash-mouseover.svg')
+				},
+				trashOff: function(index) {
+					let trash = this.$refs.check.children[index].children[2].children[0];
+					trash.setAttribute('src', 'static/trash.svg')
+				},
+
 				checkHover: function(index) {
 					let checkBox = this.$refs.check.children[index].children[0].children[0];
 					let task = this.$refs.check.children[index].children[1];
