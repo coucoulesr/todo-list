@@ -59,7 +59,7 @@ p {
 }
 
 .trash:hover {
-  content:url("../static/trashMouseover.svg")
+  content:url("../static/trash-mouseover.svg")
 }
 
 .add {
