@@ -37,6 +37,13 @@
       el: "#app",
       data: {
         tasks: tasks,
+
+				trashSrc: 'static/trash.svg',
+				trashHoverSrc: 'static/trash-mouseover.svg',
+
+				checkBoxSrc: 'static/checkbox.svg',
+				checkBoxHoverSrc: 'static/checkbox-hover.svg',
+				checkedBoxSrc: 'static/checked-box.svg',
         },
       methods: {
         createTask: function(task) {
@@ -45,11 +52,11 @@
 
 				trashHover: function(index) {
 					let trash = this.$refs.check.children[index].children[2].children[0];
-					trash.setAttribute('src', 'static/trash-mouseover.svg');
+					trash.setAttribute('src', this.trashHoverSrc);
 				},
 				trashOff: function(index) {
 					let trash = this.$refs.check.children[index].children[2].children[0];
-					trash.setAttribute('src', 'static/trash.svg');
+					trash.setAttribute('src', this.trashSrc);
 				},
 				clickTrash: function(index) {
 					this.tasks.splice(index, 1);
@@ -58,26 +65,26 @@
 				checkHover: function(index) {
 					let checkBox = this.$refs.check.children[index].children[0].children[0];
 					let task = this.$refs.check.children[index].children[1];
-					if (!task.classList.contains("finished")) {
-						checkBox.setAttribute('src', 'static/checkbox-hover.svg');
+					if (!task.classList.contains('finished')) {
+						checkBox.setAttribute('src', this.checkBoxHoverSrc);
 					}
 				},
 				checkOff: function(index) {
 					let checkBox = this.$refs.check.children[index].children[0].children[0];
 					let task = this.$refs.check.children[index].children[1];
-					if (!task.classList.contains("finished")) {
-						checkBox.setAttribute('src', 'static/checkbox.svg');
+					if (!task.classList.contains('finished')) {
+						checkBox.setAttribute('src', this.checkBoxSrc);
 					}
 				},
 				clickCheck: function(index) {
 					let checkBox = this.$refs.check.children[index].children[0].children[0];
 					let task = this.$refs.check.children[index].children[1];
-					task.classList.toggle("finished");
-					if (checkBox.getAttribute('src') == 'static/checkbox-hover.svg') {
-						checkBox.setAttribute('src', 'static/checked-box.svg');
+					task.classList.toggle('finished');
+					if (checkBox.getAttribute('src') == this.checkBoxHoverSrc) {
+						checkBox.setAttribute('src', this.checkedBoxSrc);
 					}
 					else {
-						checkBox.setAttribute('src', 'static/checkbox.svg')
+						checkBox.setAttribute('src', this.checkBoxSrc)
 					}
 				},
       },
