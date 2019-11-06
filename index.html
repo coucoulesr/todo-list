@@ -25,7 +25,7 @@
                   <div class="trash"><img src="static/trash.svg" @mouseover="trashHover(index)" @mouseout="trashOff(index)" @click="clickTrash(index)"></div>
                 </div>
               </div>
-						<div class="new-task" :style="newTaskStyle" ref="newTask">
+						<div class="new-task" ref="newTask">
 							<div class="input"><input type="text" v-model="taskInput" placeholder="New Task"></div>
 							<div class="accept"><p>
 								<a href="#" @click.prevent="addNewTask(taskInput)"> ✔️ </a>
