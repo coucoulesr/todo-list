@@ -23,16 +23,23 @@ html {
   flex-direction: column;
 }
 
-.tasks {
+.tasks, .new-task {
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
   margin: 0 2vw;
-  border-top: 1px solid black;
   padding: 20px 0;
   align-items: center;
 }
+.tasks {
+  justify-content: space-between;
+  border-top: 1px solid black;
+}
 .tasks:last-of-type{
+  border-bottom: 1px solid black;
+}
+
+.new-task {
+  justify-content: center;
   border-bottom: 1px solid black;
 }
 
@@ -46,6 +53,18 @@ p {
   font-size: 1.625rem;
   font-weight: 400;
   margin: 0;
+}
+
+input {
+  text-align: center;
+  height: 2rem;
+  margin-right: 20px;
+  width: 50vw;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 .check {
@@ -88,4 +107,8 @@ p {
   right: 10px;
   margin: 0;
   padding: 0;
+}
+
+.hidden {
+  display: none;
 }

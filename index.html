@@ -25,7 +25,17 @@
                   <div class="trash"><img src="static/trash.svg" @mouseover="trashHover(index)" @mouseout="trashOff(index)" @click="clickTrash(index)"></div>
                 </div>
               </div>
-            <div class="add"><p>+</p></div>
+						<div class="new-task" :style="newTaskStyle" ref="newTask">
+							<div class="input"><input type="text" v-model="taskInput" placeholder="New Task"></div>
+							<div class="accept"><p>
+								<a href="#" @click.prevent="addNewTask(taskInput)"> ✔️ </a>
+								<a href="#" v-show="tasks.length > 0" @click.prevent="closeNewTask(taskInput)"> ❌ </a>
+							</p></div>
+						</div>
+
+            <div class="add" v-show="tasks.length > 0" ref="add"><p>
+							<a href="#" @click.prevent="summonNewTaskDialog">+</a>
+						</p></div>
       </div>
       <div class="attribution">© 2019 Richard Coucoules</div>
     </div>
@@ -36,7 +46,8 @@
     var app = new Vue({
       el: "#app",
       data: {
-        tasks: tasks,
+        tasks: [],
+				taskInput: "",
 
 				trashSrc: 'static/trash.svg',
 				trashHoverSrc: 'static/trash-mouseover.svg',
@@ -46,9 +57,20 @@
 				checkedBoxSrc: 'static/checked-box.svg',
         },
       methods: {
-        createTask: function(task) {
-          this.tasks.push(task);
+        addNewTask: function(input) {
+          this.tasks.push(input);
+					this.taskInput = "";
+					this.$refs.newTask.classList.add("hidden");
+					this.$refs.add.classList.remove("hidden");
         },
+				closeNewTask: function(input) {
+					this.$refs.newTask.classList.add("hidden");
+					this.$refs.add.classList.remove("hidden");
+				},
+				summonNewTaskDialog: function() {
+					this.$refs.newTask.classList.remove("hidden");
+					this.$refs.add.classList.add("hidden");
+				},
 
 				trashHover: function(index) {
 					let trash = this.$refs.task.children[index].children[2].children[0];
@@ -60,6 +82,9 @@
 				},
 				clickTrash: function(index) {
 					this.tasks.splice(index, 1);
+					if (this.tasks.length == 0) {
+						this.$refs.newTask.classList.remove("hidden");
+					}
 				},
 
 				checkHover: function(index) {
