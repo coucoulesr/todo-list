@@ -84,6 +84,9 @@
 				},
 				clickTrash: function(index) {
 					this.tasks.splice(index, 1);
+					if (this.tasks.length == 0) {
+						this.summonNewTaskDialog()
+					}
 				},
 
 				checkHover: function(task) {
