@@ -1,120 +1,135 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>To-Do</title>
-		<link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-    <style>
-      body {
-        background-image: url("static/bg.jpg");
-      }
-    </style>
-	</head>
 
-  <body>
-    <div class="container">
-      <div id="app">
-          <h1>To-Do</h1>
-            <div class="task-wrapper" ref="task">
-                <div class="tasks" v-for="(task, index) in tasks">
-                  <div class="check"><img :src="task.checkBoxImgSrc" @mouseover="checkHover(task)" @mouseout="checkMouseOff(task)" @click="clickCheck(task)"></div>
-                  <div class="task" :class="{finished: task.finished}"><p>{{ task.name }}</p></div>
-                  <div class="trash"><img :src="task.trashImgSrc" @mouseover="trashHover(task)" @mouseout="trashMouseOff(task)" @click="clickTrash(index)"></div>
-                </div>
-              </div>
-						<div class="new-task" ref="newTask">
-							<div class="input"><input type="text" v-model="taskInput" @keyup="inputListener($event)" placeholder="New Task"></div>
-							<div class="accept"><p>
-								<a href="#" @click.prevent="addNewTask()"> ✔️ </a>
-								<a href="#" v-show="tasks.length > 0" @click.prevent="closeNewTask()"> ❌ </a>
-							</p></div>
-						</div>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>To-Do</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background-image: url("static/bg.jpg");
+		}
+	</style>
+</head>
 
-            <div class="add" v-show="tasks.length > 0" ref="add"><p>
-							<a href="#" @click.prevent="summonNewTaskDialog">+</a>
-						</p></div>
-      </div>
-      <div class="attribution">© 2019 Richard Coucoules</div>
-    </div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script>
-    var app = new Vue({
-      el: "#app",
-      data: {
-        tasks: [],
-				taskInput: "",
+<body>
+	<div class="container">
+		<div id="app">
+			<div class="header">
+				<p class="btn" @click.prevent="loadList">Load</p>
+				<h1>To-Do List</h1>
+				<p class="btn" @click.prevent="saveList">Save</p>
+			</div>
+			<div class="task-wrapper" ref="task">
+				<div class="tasks" v-for="(task, index) in tasks">
+					<div class="check"><img :src="task.checkBoxImgSrc" @mouseover="checkHover(task)"
+							@mouseout="checkMouseOff(task)" @click="clickCheck(task)"></div>
+					<div class="task" :class="{finished: task.finished}">
+						<p>{{ task.name }}</p>
+					</div>
+					<div class="trash"><img :src="task.trashImgSrc" @mouseover="trashHover(task)"
+							@mouseout="trashMouseOff(task)" @click="clickTrash(index)"></div>
+				</div>
+			</div>
+			<div class="new-task" ref="newTask">
+				<div class="input"><input type="text" v-model="taskInput" @keyup="inputListener($event)"
+						placeholder="New Task"></div>
+				<div class="accept">
+					<p>
+						<a href="#" @click.prevent="addNewTask()"> ✔️ </a>
+						<a href="#" v-show="tasks.length > 0" @click.prevent="closeNewTask()"> ❌ </a>
+					</p>
+				</div>
+			</div>
 
-				trashSrc: 'static/trash.svg',
-				trashHoverSrc: 'static/trash-mouseover.svg',
+			<div class="add" v-show="tasks.length > 0" ref="add">
+				<p>
+					<a href="#" @click.prevent="summonNewTaskDialog">+</a>
+				</p>
+			</div>
+		</div>
+		<div class="attribution">© 2019 Richard Coucoules</div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	var app = new Vue({
+		el: "#app",
+		data: {
+			tasks: [],
+			taskInput: "",
 
-				checkBoxSrc: 'static/checkbox.svg',
-				checkBoxHoverSrc: 'static/checkbox-hover.svg',
-				checkedBoxSrc: 'static/checked-box.svg',
-        },
-      methods: {
-        addNewTask: function() {
-          this.tasks.push({
-						name: this.taskInput,
-						finished: false,
-						checkBoxImgSrc: this.checkBoxSrc,
-						trashImgSrc: this.trashSrc,
-					});
-					this.taskInput = "";
-					this.$refs.newTask.classList.add("hidden");
-					this.$refs.add.classList.remove("hidden");
-        },
-				closeNewTask: function() {
-					this.$refs.newTask.classList.add("hidden");
-					this.$refs.add.classList.remove("hidden");
-				},
-				summonNewTaskDialog: function() {
-					this.$refs.newTask.classList.remove("hidden");
-					this.$refs.add.classList.add("hidden");
-				},
+			trashSrc: 'static/trash.svg',
+			trashHoverSrc: 'static/trash-mouseover.svg',
 
-				trashHover: function(task) {
-					task.trashImgSrc = this.trashHoverSrc;
-				},
-				trashMouseOff: function(task) {
-					task.trashImgSrc = this.trashSrc;
-				},
-				clickTrash: function(index) {
-					this.tasks.splice(index, 1);
-					if (this.tasks.length == 0) {
-						this.summonNewTaskDialog()
-					}
-				},
+			checkBoxSrc: 'static/checkbox.svg',
+			checkBoxHoverSrc: 'static/checkbox-hover.svg',
+			checkedBoxSrc: 'static/checked-box.svg',
+		},
+		methods: {
+			addNewTask: function () {
+				this.tasks.push({
+					name: this.taskInput,
+					finished: false,
+					checkBoxImgSrc: this.checkBoxSrc,
+					trashImgSrc: this.trashSrc,
+				});
+				this.taskInput = "";
+				this.$refs.newTask.classList.add("hidden");
+				this.$refs.add.classList.remove("hidden");
+			},
+			closeNewTask: function () {
+				this.$refs.newTask.classList.add("hidden");
+				this.$refs.add.classList.remove("hidden");
+			},
+			summonNewTaskDialog: function () {
+				this.$refs.newTask.classList.remove("hidden");
+				this.$refs.add.classList.add("hidden");
+			},
 
-				checkHover: function(task) {
-					if (!task.finished) {
-						task.checkBoxImgSrc = this.checkBoxHoverSrc;
-					}
-				},
-				checkMouseOff: function(task) {
-					if (!task.finished) {
-						task.checkBoxImgSrc = this.checkBoxSrc;
-					}
-				},
-				clickCheck: function(task) {
-					task.finished = !task.finished;
-					if (task.finished) {
-						task.checkBoxImgSrc = this.checkedBoxSrc;
-					}
-					else {
-						task.checkBoxImgSrc = this.checkBoxSrc;
-					}
-				},
-
-				inputListener: function(event) {
-					if (event.key === "Enter") {
-						this.addNewTask(this.taskInput);
-					}
+			trashHover: function (task) {
+				task.trashImgSrc = this.trashHoverSrc;
+			},
+			trashMouseOff: function (task) {
+				task.trashImgSrc = this.trashSrc;
+			},
+			clickTrash: function (index) {
+				this.tasks.splice(index, 1);
+				if (this.tasks.length == 0) {
+					this.summonNewTaskDialog()
 				}
-      },
-    });
-  </script>
+			},
+
+			checkHover: function (task) {
+				if (!task.finished) {
+					task.checkBoxImgSrc = this.checkBoxHoverSrc;
+				}
+			},
+			checkMouseOff: function (task) {
+				if (!task.finished) {
+					task.checkBoxImgSrc = this.checkBoxSrc;
+				}
+			},
+			clickCheck: function (task) {
+				task.finished = !task.finished;
+				if (task.finished) {
+					task.checkBoxImgSrc = this.checkedBoxSrc;
+				}
+				else {
+					task.checkBoxImgSrc = this.checkBoxSrc;
+				}
+			},
+
+			inputListener: function (event) {
+				if (event.key === "Enter") {
+					this.addNewTask(this.taskInput);
+				}
+			}
+		},
+	});
+</script>
+
 </html>

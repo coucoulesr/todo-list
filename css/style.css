@@ -18,6 +18,29 @@ html {
   position: relative;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn {
+  font-size: 1.25rem;
+  padding: 10px;
+  margin: 0 10px;
+  background-color: rgba(102,51,153, 0.3);
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: all 0.4s;
+}
+
+.btn:hover {
+  background-color: rgba(102,51,153, 0.9);
+  color: white;
+  cursor: pointer;
+}
+
 #app {
   display: flex;
   flex-direction: column;
