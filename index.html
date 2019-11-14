@@ -54,8 +54,27 @@
 		<div class="attribution"><a href="https://www.racoucoules.com/">© 2019 Richard Coucoules</a></div>
 	</div>
 </body>
+
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+	// Firebase configuration
+	var firebaseConfig = {
+		apiKey: "AIzaSyC1Tq20PQhmtl1sMUYLbObEtIIuCfDkZqM",
+		authDomain: "todo-list-d6686.firebaseapp.com",
+		databaseURL: "https://todo-list-d6686.firebaseio.com",
+		projectId: "todo-list-d6686",
+		storageBucket: "todo-list-d6686.appspot.com",
+		messagingSenderId: "16741161929",
+		appId: "1:16741161929:web:cf7b97a92f43e4fcb9a618"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	const db = firebase.firestore();
+
+
+	// Vue instance
 	var app = new Vue({
 		el: "#app",
 		data: {
@@ -122,12 +141,35 @@
 					task.checkBoxImgSrc = this.checkBoxSrc;
 				}
 			},
-
 			inputListener: function (event) {
 				if (event.key === "Enter") {
 					this.addNewTask(this.taskInput);
 				}
-			}
+			},
+			saveList: function () {
+				const listKey = prompt("Enter a unique username to associate with this list.");
+				if (listKey) {
+					db.collection('lists').doc(listKey).set({
+						list: this.tasks
+					}).then(() => alert(`To-do list saved with ID "${listKey}s"`),
+						error => alert("Error adding list: " + error));
+				}
+			},
+			loadList: function () {
+				const listKey = prompt("Enter your unique username associated with your list.");
+				if (listKey) {
+					db.collection('lists').doc(listKey).get()
+						.then(doc => {
+							if (doc.exists) {
+								this.tasks = doc.data().list;
+								this.closeNewTask();
+							} else {
+								alert("Username does not exist.")
+							}
+						},
+							error => alert("Error loading list: " + error));
+				}
+			},
 		},
 	});
 </script>
