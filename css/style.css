@@ -141,3 +141,7 @@ a {
 .hidden {
   display: none;
 }
+
+[v-cloak] {
+  display: hidden;
+}

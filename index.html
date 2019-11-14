@@ -23,7 +23,7 @@
 				<h1>To-Do List</h1>
 				<p class="btn" @click.prevent="saveList">Save</p>
 			</div>
-			<div class="task-wrapper" ref="task">
+			<div class="task-wrapper" ref="task" v-cloak>
 				<div class="tasks" v-for="(task, index) in tasks">
 					<div class="check"><img :src="task.checkBoxImgSrc" @mouseover="checkHover(task)"
 							@mouseout="checkMouseOff(task)" @click="clickCheck(task)"></div>
