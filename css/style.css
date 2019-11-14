@@ -5,6 +5,10 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  background-color: rebeccapurple;
+}
+
 .container {
   font-family: 'Muli', sans-serif;
   text-align: center;
@@ -165,5 +169,23 @@ a {
   .header p {
     font-size: 1.25rem;
     padding: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    background-image: url(../static/bg-small.jpg);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1920px) {
+  body {
+    background-image: url('../static/bg-med.jpg');
+  }
+}
+
+@media (min-width: 1921px) {
+  body {
+    background-image: url('../static/bg-huge');
   }
 }
