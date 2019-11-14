@@ -174,7 +174,7 @@ a {
 
 @media (max-width: 767px) {
   body {
-    background-image: url(../static/bg-small.jpg);
+    background-image: url('../static/bg-small.jpg');
   }
 }
 
@@ -186,6 +186,6 @@ a {
 
 @media (min-width: 1921px) {
   body {
-    background-image: url('../static/bg-huge');
+    background-image: url('../static/bg-huge.jpg');
   }
 }
