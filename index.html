@@ -45,13 +45,13 @@
 				</div>
 			</div>
 
-			<div class="add" v-show="tasks.length > 0" ref="add">
+			<div class="add" v-show="tasks.length > 0" ref="add" @click.prevent="summonNewTaskDialog">
 				<p>
-					<a href="#" @click.prevent="summonNewTaskDialog">+</a>
+					<a href="#">+</a>
 				</p>
 			</div>
 		</div>
-		<div class="attribution">© 2019 Richard Coucoules</div>
+		<div class="attribution"><a href="https://www.racoucoules.com/">© 2019 Richard Coucoules</a></div>
 	</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

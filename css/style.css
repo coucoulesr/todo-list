@@ -87,7 +87,6 @@ input {
 
 a {
   text-decoration: none;
-  color: white;
 }
 
 .check img {
@@ -101,7 +100,6 @@ a {
 }
 
 .add {
-  color: white;
   background-color: green;
   font-size: 1.625rem;
   align-self: flex-end;
@@ -115,6 +113,11 @@ a {
 
 .add:hover {
   padding-top: 15px;
+  cursor: pointer;
+}
+
+.add a {
+  color: white;
 }
 
 .finished {
@@ -129,6 +132,10 @@ a {
   right: 10px;
   margin: 0;
   padding: 0;
+}
+
+.attribution a {
+  color: black;
 }
 
 .hidden {
