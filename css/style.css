@@ -25,14 +25,14 @@ html {
 }
 
 .btn {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   padding: 10px;
   margin: 0 10px;
   background-color: rgba(102,51,153, 0.3);
   color: black;
   border: 1px solid black;
   border-radius: 10px;
-  transition: all 0.4s;
+  transition: background-color 0.4s, color 0.8s;
 }
 
 .btn:hover {
@@ -144,4 +144,26 @@ a {
 
 [v-cloak] {
   display: hidden;
+}
+
+@media (min-width:980px) {
+  h1 {
+    font-size: 4.5rem;
+  }
+  
+  .header p {
+    font-size: 2.5rem;
+    padding: 5 30px;
+  }
+}
+
+@media (max-width:620px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .header p {
+    font-size: 1.25rem;
+    padding: 5px;
+  }
 }
